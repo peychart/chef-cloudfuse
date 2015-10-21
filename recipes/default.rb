@@ -18,13 +18,19 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-cookbook_file '/tmp/install-cloudfuse.sh' do
- source 'install-cloudfuse.sh'
- owner 'root'
- group 'root'
- mode '0500'
- action :create
- notifies :run, "execute[install-cloudfuse.sh]", :immediately
+if node['chef-cloudfuse']['install_script'] != ''
+ bash 'wget installèscript' do
+  code "cd /tmp && wget #{node['chef-cloudfuse']['install_script']}"
+ end
+else
+ cookbook_file '/tmp/install-cloudfuse.sh' do
+  source 'install-cloudfuse.sh'
+  owner 'root'
+  group 'root'
+  mode '0500'
+  action :create
+  notifies :run, "execute[install-cloudfuse.sh]", :immediately
+ end
 end
 
 directory '/media/cloudfuse/' do
