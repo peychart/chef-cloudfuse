@@ -19,7 +19,7 @@
 #
 
 if node['chef-cloudfuse']['install_script'] != ''
- bash 'wget installèscript' do
+ bash 'wget install_script' do
   code "cd /tmp && wget #{node['chef-cloudfuse']['install_script']}"
  end
 else
