@@ -110,7 +110,8 @@ mkdir -p $(dirname $CONFile); cat >$CONFile <<@@@
  && printerr "cannot edit \"$CONFile\"" && exit 1
 
 # Montage de la resource cloudfuse:
-mkdir -p $mountpoint; mount| grep -qsw '^cloudfuse' || mount cloudfuse || exit 1
+printstd "\nTry to mount ressource..."
+mkdir -p $mountpoint; mount| grep -qsw '^cloudfuse' || mount $mountpoint || exit 1
 
 printstd "$SERVICE succefully configured."
 
